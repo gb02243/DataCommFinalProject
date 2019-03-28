@@ -88,18 +88,25 @@ public class Server extends javax.swing.JFrame {
     private void message_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_message_sendActionPerformed
         try {
             String message_out = "";
-            
+
             message_out = message_text.getText().trim();
             dout.writeUTF(message_out);
-            if(!message_out.equals("exit")){
-                chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
-            }
+            chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
+            message_text.setText("");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_message_sendActionPerformed
 
     private void message_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_message_textActionPerformed
-        // TODO add your handling code here:
+        try {
+            String message_out = "";
+
+            message_out = message_text.getText().trim();
+            dout.writeUTF(message_out);
+            chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
+            message_text.setText("");
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_message_textActionPerformed
 
     /**
