@@ -148,15 +148,9 @@ public class Client extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                Client client = new Client();
-                
                 ConnectionInfo conninf = new ConnectionInfo();
                 conninf.setLocationRelativeTo(null);
                 conninf.setVisible(true);
-                
-//                client.setLocationRelativeTo(null);
-//                client.setVisible(true);
-//                new ConnectionInfo().setVisible(true);
             }
         });
         

@@ -120,7 +120,6 @@ public class ConnectionInfo extends javax.swing.JFrame {
             Client c = new Client(server_address, client_username);
             c.setLocationRelativeTo(null);
             c.setVisible(true);
-//            new Client().setVisible(true);
         }
     }//GEN-LAST:event_connect_buttonActionPerformed
 
@@ -131,7 +130,6 @@ public class ConnectionInfo extends javax.swing.JFrame {
             Client c = new Client(server_address, client_username);
             c.setLocationRelativeTo(null);
             c.setVisible(true);
-//            new Client().setVisible(true);
         }
     }//GEN-LAST:event_username_textActionPerformed
 
