@@ -21,9 +21,19 @@ public class Client extends javax.swing.JFrame {
     static Socket s;
     static DataInputStream din;
     static DataOutputStream dout;
+    static String Server_Address;
+    static String Username;
+    
     public Client() {
         initComponents();
     }
+    
+    public Client(String a, String u) {
+        initComponents();
+        this.Server_Address = a;
+        this.Username = u;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,7 +148,14 @@ public class Client extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Client().setVisible(true);
+//                Client client = new Client();
+                
+                ConnectionInfo conninf = new ConnectionInfo();
+                conninf.setLocationRelativeTo(null);
+                conninf.setVisible(true);
+                
+//                client.setLocationRelativeTo(null);
+//                client.setVisible(true);
 //                new ConnectionInfo().setVisible(true);
             }
         });

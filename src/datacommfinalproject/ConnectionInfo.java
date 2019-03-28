@@ -14,6 +14,18 @@ public class ConnectionInfo extends javax.swing.JFrame {
     /**
      * Creates new form ConnectionInfo
      */
+    
+    private String server_address = "";
+    private String client_username = "";
+    
+    public String getServerAddress(){
+        return server_address;
+    }
+    
+    public String getClientUsername(){
+        return client_username;
+    }
+    
     public ConnectionInfo() {
         initComponents();
     }
@@ -28,25 +40,35 @@ public class ConnectionInfo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        server_address = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        address_text = new javax.swing.JTextField();
+        connect_button = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        username_text = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connect to Server");
 
         jLabel1.setText("Please Enter the Server IP:");
 
-        server_address.setText("127.0.0.1");
-        server_address.addActionListener(new java.awt.event.ActionListener() {
+        address_text.setText("127.0.0.1");
+        address_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                server_addressActionPerformed(evt);
+                address_textActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Connect");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        connect_button.setText("Connect");
+        connect_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                connect_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Username:");
+
+        username_text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                username_textActionPerformed(evt);
             }
         });
 
@@ -55,35 +77,63 @@ public class ConnectionInfo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(server_address)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(address_text)
+                            .addComponent(connect_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(username_text)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel2)))
                 .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(server_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(address_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(username_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(connect_button)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void server_addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_server_addressActionPerformed
+    private void address_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address_textActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_server_addressActionPerformed
+    }//GEN-LAST:event_address_textActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void connect_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connect_buttonActionPerformed
+        this.server_address = address_text.getText().trim();
+        this.client_username = username_text.getText().trim();
+        if(!username_text.equals("")){
+            Client c = new Client(server_address, client_username);
+            c.setLocationRelativeTo(null);
+            c.setVisible(true);
+//            new Client().setVisible(true);
+        }
+    }//GEN-LAST:event_connect_buttonActionPerformed
+
+    private void username_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_textActionPerformed
+        this.server_address = address_text.getText().trim();
+        this.client_username = username_text.getText().trim();
+        if(!username_text.equals("")){
+            Client c = new Client(server_address, client_username);
+            c.setLocationRelativeTo(null);
+            c.setVisible(true);
+//            new Client().setVisible(true);
+        }
+    }//GEN-LAST:event_username_textActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,8 +171,10 @@ public class ConnectionInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField address_text;
+    private javax.swing.JButton connect_button;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField server_address;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField username_text;
     // End of variables declaration//GEN-END:variables
 }
