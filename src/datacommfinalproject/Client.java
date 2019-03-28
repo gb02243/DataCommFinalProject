@@ -154,9 +154,8 @@ public class Client extends javax.swing.JFrame {
             }
         });
         
-        String serveraddress = "127.0.0.1";
         try {
-            s = new Socket(serveraddress,1201);
+            s = new Socket(Server_Address,1201);
             
             din = new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
