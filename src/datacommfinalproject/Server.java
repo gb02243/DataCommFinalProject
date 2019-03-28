@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package datacommfinalproject;
 
 import java.io.DataInputStream;
@@ -10,20 +5,16 @@ import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- *
- * @author griffin
- */
 public class Server extends javax.swing.JFrame {
 
     /**
      * Creates new form Server
      */
     
-    static ServerSocket ss;
-    static Socket s;
-    static DataInputStream din;
-    static DataOutputStream dout;
+    private static ServerSocket ss;
+    private static Socket s;
+    private static DataInputStream din;
+    private static DataOutputStream dout;
     
     public Server() {
         initComponents();
