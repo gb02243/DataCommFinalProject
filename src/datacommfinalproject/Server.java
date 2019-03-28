@@ -90,9 +90,11 @@ public class Server extends javax.swing.JFrame {
             String message_out = "";
 
             message_out = message_text.getText().trim();
-            dout.writeUTF(message_out);
-            chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
+            if(!message_out.equals("")){
+                dout.writeUTF(message_out);
+                chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
             message_text.setText("");
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_message_sendActionPerformed
@@ -102,9 +104,11 @@ public class Server extends javax.swing.JFrame {
             String message_out = "";
 
             message_out = message_text.getText().trim();
-            dout.writeUTF(message_out);
-            chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
+            if(!message_out.equals("")){
+                dout.writeUTF(message_out);
+                chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
             message_text.setText("");
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_message_textActionPerformed
@@ -160,7 +164,6 @@ public class Server extends javax.swing.JFrame {
             
         } catch (Exception e) {
         }
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
