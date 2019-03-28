@@ -86,20 +86,14 @@ public class Server extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void message_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_message_sendActionPerformed
-        try {
-            String message_out = "";
-
-            message_out = message_text.getText().trim();
-            if(!message_out.equals("")){
-                dout.writeUTF(message_out);
-                chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
-            message_text.setText("");
-            }
-        } catch (Exception e) {
-        }
+        sendAction();
     }//GEN-LAST:event_message_sendActionPerformed
 
     private void message_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_message_textActionPerformed
+        sendAction();
+    }//GEN-LAST:event_message_textActionPerformed
+
+    private void sendAction(){
         try {
             String message_out = "";
 
@@ -107,11 +101,11 @@ public class Server extends javax.swing.JFrame {
             if(!message_out.equals("")){
                 dout.writeUTF(message_out);
                 chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
-            message_text.setText("");
+                message_text.setText("");
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_message_textActionPerformed
+    }
 
     /**
      * @param args the command line arguments

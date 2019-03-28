@@ -161,20 +161,14 @@ public class Client extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void message_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_message_sendActionPerformed
-        try {
-            String message_out = "";
-
-            message_out = message_text.getText().trim();
-            if(!message_out.equals("")){
-                dout.writeUTF(message_out);
-                chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
-            message_text.setText("");
-            }
-        } catch (Exception e) {
-        }
+        sendAction();
     }//GEN-LAST:event_message_sendActionPerformed
 
     private void message_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_message_textActionPerformed
+        sendAction();
+    }//GEN-LAST:event_message_textActionPerformed
+
+    private void sendAction(){
         try {
             String message_out = "";
 
@@ -182,32 +176,21 @@ public class Client extends javax.swing.JFrame {
             if(!message_out.equals("")){
                 dout.writeUTF(message_out);
                 chat_display.setText(chat_display.getText().trim()+"\nYou: "+message_out);
-            message_text.setText("");
+                message_text.setText("");
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_message_textActionPerformed
+    }
 
     private void username_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_textActionPerformed
-        this.Server_Address = address_text.getText().trim();
-        this.Username = username_text.getText().trim();
-        if(!username_text.getText().trim().equals("")){
-            c.setVisible(true);
-            c.setLocationRelativeTo(null);
-            conninfo.setVisible(false);
-            try{
-                s = new Socket(Server_Address,1201);
-
-                din = new DataInputStream(s.getInputStream());
-                dout = new DataOutputStream(s.getOutputStream());
-                chat_display.setText("Connected.");
-            }catch(Exception e){
-                chat_display.setText("Could not connect to host. Try again? y/n");
-            }
-        }
+        connectAction();
     }//GEN-LAST:event_username_textActionPerformed
 
     private void connect_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connect_buttonActionPerformed
+        connectAction();
+    }//GEN-LAST:event_connect_buttonActionPerformed
+
+    private void connectAction(){
         this.Server_Address = address_text.getText().trim();
         this.Username = username_text.getText().trim();
         if(!username_text.getText().trim().equals("")){
@@ -224,7 +207,7 @@ public class Client extends javax.swing.JFrame {
                 chat_display.setText("Could not connect to host.");
             }
         }
-    }//GEN-LAST:event_connect_buttonActionPerformed
+    }
 
     private void address_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address_textActionPerformed
         // TODO add your handling code here:
