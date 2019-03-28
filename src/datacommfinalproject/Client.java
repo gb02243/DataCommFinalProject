@@ -195,6 +195,15 @@ public class Client extends javax.swing.JFrame {
             c.setVisible(true);
             c.setLocationRelativeTo(null);
             conninfo.setVisible(false);
+            try{
+                s = new Socket(Server_Address,1201);
+
+                din = new DataInputStream(s.getInputStream());
+                dout = new DataOutputStream(s.getOutputStream());
+                chat_display.setText("Connected.");
+            }catch(Exception e){
+                chat_display.setText("Could not connect to host. Try again? y/n");
+            }
         }
     }//GEN-LAST:event_username_textActionPerformed
 
@@ -205,6 +214,15 @@ public class Client extends javax.swing.JFrame {
             c.setVisible(true);
             c.setLocationRelativeTo(null);
             conninfo.setVisible(false);
+            try{
+                s = new Socket(Server_Address,1201);
+
+                din = new DataInputStream(s.getInputStream());
+                dout = new DataOutputStream(s.getOutputStream());
+                chat_display.setText("Connected.");
+            }catch(Exception e){
+                chat_display.setText("Could not connect to host.");
+            }
         }
     }//GEN-LAST:event_connect_buttonActionPerformed
 
@@ -250,11 +268,6 @@ public class Client extends javax.swing.JFrame {
         });
         
         try {
-            s = new Socket(Server_Address,1201);
-            
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-            
             String message_in = "";
             while(!message_in.equals("exit")){
                 message_in = din.readUTF();
