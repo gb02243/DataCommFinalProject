@@ -36,10 +36,8 @@ public class ClientHandler extends Thread {
                     + " type /exit to leave");
             synchronized (this) {
                 for (int i = 0; i < clientCount; i++) {
-                    if (threads[i] != null && threads[i] == this) {
                         username = "@" + name;
                         break;
-                    }
                 }
                 for (int i = 0; i < clientCount; i++) {
                     if (threads[i] != null && threads[i] != this) {
@@ -63,6 +61,7 @@ public class ClientHandler extends Thread {
                 }
 
             }
+
             // handle user leaving
             synchronized (this) {
                 for (int i = 0; i < clientCount; i++) {
