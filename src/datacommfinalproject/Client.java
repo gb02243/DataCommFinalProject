@@ -23,6 +23,7 @@ public class Client {
             super.notifyObservers(arg);
         }
 
+        // create socket for observers
         public void InitSocket(String server, int port) throws IOException {
             s = new Socket(server, port);
             dout = s.getOutputStream();
@@ -42,7 +43,8 @@ public class Client {
             receivingThread.start();
         }
 
-        private static final String CRLF = "\r\n"; // newline
+        // carriage return
+        private static final String CRLF = "\r\n";
 
         // send message
         public void send(String text) {
@@ -76,6 +78,7 @@ public class Client {
             build();
         }
 
+        // build the gui
         private void build() {
             chat_display = new JTextArea(20, 50);
             chat_display.setEditable(false);
@@ -90,7 +93,7 @@ public class Client {
             box.add(message_text);
             box.add(message_send);
 
-            // Action for the inputTextField and the goButton
+            // action for textfield and button
             ActionListener sendListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String message_out = message_text.getText();
@@ -113,6 +116,7 @@ public class Client {
 
         }
 
+        // update observers
         public void update(Observable o, Object arg) {
             final Object finalArg = arg;
             SwingUtilities.invokeLater(new Runnable() {
@@ -130,7 +134,6 @@ public class Client {
 
         JFrame frame = new ClientGui(observable);
         frame.setTitle("Client");
-//        ((ClientGui) frame).chat_display.append("Connected to " + server_address + ":" + port);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -141,6 +144,7 @@ public class Client {
         JFrame addressdialog = new JFrame("Server Information");
         String server_address = JOptionPane.showInputDialog(addressdialog, "Enter the Server IP:");
 
+        // connect to server
         try {
             observable.InitSocket(server_address, port);
         } catch (Exception e) {
