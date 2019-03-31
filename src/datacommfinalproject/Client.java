@@ -68,7 +68,7 @@ public class Client {
         private JTextArea chat_display;
         private JTextField message_text;
         private JButton message_send;
-        private ClientObservable clientObservable;
+        private static ClientObservable clientObservable;
 
         public ClientGui(ClientObservable clientObservable) {
             this.clientObservable = clientObservable;
@@ -125,7 +125,6 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        String server_address = "127.0.0.1";
         int port = 1207;
         ClientObservable observable = new ClientObservable();
 
@@ -138,6 +137,10 @@ public class Client {
         frame.setResizable(false);
         frame.setVisible(true);
 
+        // get server address from dialog
+        JFrame addressdialog = new JFrame("Server Information");
+        String server_address = JOptionPane.showInputDialog(addressdialog, "Enter the Server IP:");
+
         try {
             observable.InitSocket(server_address, port);
         } catch (Exception e) {
@@ -145,5 +148,12 @@ public class Client {
             ((ClientGui) frame).chat_display.append("Cannot connect to " + server_address + ":" + port);
             e.printStackTrace();
         }
+
+        // get username from dialog
+        JFrame userdialog = new JFrame("User Information");
+        String uname = JOptionPane.showInputDialog(userdialog, "Enter your username:");
+        ClientGui.clientObservable.send(uname);
+
+
     }
 }

@@ -28,7 +28,6 @@ public class ClientHandler extends Thread {
             dout = new PrintStream(s.getOutputStream());
             String name;
             while (true) {
-                dout.println("Enter your name:");
                 name = din.readLine().trim();
                 break;
             }
@@ -88,7 +87,6 @@ public class ClientHandler extends Thread {
             dout.close();
             s.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
