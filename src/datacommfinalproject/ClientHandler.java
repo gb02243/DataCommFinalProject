@@ -17,6 +17,8 @@ public class ClientHandler extends Thread {
         this.s = s;
         this.threads = threads;
         clientCount = threads.length;
+        // TODO remove
+        System.out.println("ClientHandler - ClientHandler constructed");
     }
 
     public void run() {
@@ -26,9 +28,13 @@ public class ClientHandler extends Thread {
         try {
             din = new DataInputStream(s.getInputStream());
             dout = new PrintStream(s.getOutputStream());
+            // TODO remove
+            System.out.println("ClientHandler - input & output streams created");
             String name;
             while (true) {
                 name = din.readLine().trim();
+                // TODO remove
+                System.out.println("ClientHandler - Name received");
                 break;
             }
 
@@ -42,6 +48,8 @@ public class ClientHandler extends Thread {
                 for (int i = 0; i < clientCount; i++) {
                     if (threads[i] != null && threads[i] != this) {
                         threads[i].dout.println("--- "+name+" has joined the chat ---");
+                        // TODO remove
+                        System.out.println("ClientHandler - join message broadcasted to client "+i);
                     }
                 }
             }
@@ -56,6 +64,8 @@ public class ClientHandler extends Thread {
                     for (int i = 0; i < clientCount; i++) {
                         if (threads[i] != null && threads[i].username != null) {
                             threads[i].dout.println("<" + name + ">: " + message);
+                            // TODO remove
+                            System.out.println("ClientHandler - message broadcasted to client "+i);
                         }
                     }
                 }
@@ -68,6 +78,8 @@ public class ClientHandler extends Thread {
                     if (threads[i] != null && threads[i] != this
                             && threads[i].username != null) {
                         threads[i].dout.println("--- "+name+" has left the chat ---");
+                        // TODO remove
+                        System.out.println("ClientHandler - leave message broadcasted to client "+i);
                     }
                 }
             }
@@ -77,6 +89,8 @@ public class ClientHandler extends Thread {
                 for (int i = 0; i < clientCount; i++) {
                     if (threads[i] == this) {
                         threads[i] = null;
+                        // TODO remove
+                        System.out.println("ClientHandler - client "+i+" thread removed");
                     }
                 }
             }
@@ -85,6 +99,9 @@ public class ClientHandler extends Thread {
             din.close();
             dout.close();
             s.close();
+            // TODO remove
+            System.out.println("ClientHandler - Input & Output streams closed");
+            System.out.println("ClientHandler - Client socket closed");
         } catch (IOException e) {
         }
     }

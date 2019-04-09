@@ -13,7 +13,9 @@ public class Server {
 
     public static void main(String[] args) {
         try{
-            ss = new ServerSocket(1207);
+            ss = new ServerSocket(1201);
+            // TODO remove
+            System.out.println("Server - Server started");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -22,10 +24,14 @@ public class Server {
         while(true){
             try{
                 s = ss.accept();
+                // TODO remove
+                System.out.println("Server - Client connected");
                 int i = 0;
                 for (i = 0; i < maxClients; i++) {
                     if(threads[i] == null){
                         (threads[i] = new ClientHandler(s, threads)).start();
+                        // TODO remove
+                        System.out.println("Server - thread created for client ");
                         break;
                     }
                 }

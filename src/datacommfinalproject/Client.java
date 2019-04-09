@@ -26,7 +26,11 @@ public class Client {
         // create socket for observers
         public void InitSocket(String server, int port) throws IOException {
             s = new Socket(server, port);
+            // TODO remove
+            System.out.println("Client - ClientObservable - InitSocket(): Client Socket Created");
             dout = s.getOutputStream();
+            // TODO remove
+            System.out.println("Client - ClientObservable - InitSocket(): Output Stream Created");
             Thread receivingThread = new Thread() {
                 @Override
                 public void run() {
@@ -35,12 +39,16 @@ public class Client {
                         String line;
                         while ((line = reader.readLine()) != null)
                             notifyObservers(line);
+                        // TODO remove
+                        System.out.println("Client - ClientObservable - InitSocket - Thread - run(): Observers Notified");
                     } catch (IOException ex) {
                         notifyObservers(ex);
                     }
                 }
             };
             receivingThread.start();
+            // TODO remove
+            System.out.println("Client - ClientObservable - InitSocket (): thread started");
         }
 
         // carriage return
@@ -49,8 +57,11 @@ public class Client {
         // send message
         public void send(String text) {
             try {
+                // TODO remove
                 dout.write((text + CRLF).getBytes());
+                System.out.println("Client - send(): text written to output stream");
                 dout.flush();
+                System.out.println("Client - send(): output stream flushed");
             } catch (IOException ex) {
                 notifyObservers(ex);
             }
@@ -60,6 +71,8 @@ public class Client {
         public void close() {
             try {
                 s.close();
+                // TODO remove
+                System.out.println("Client - close():");
             } catch (IOException ex) {
                 notifyObservers(ex);
             }
@@ -75,7 +88,11 @@ public class Client {
         public ClientGui(ClientObservable clientObservable) {
             this.clientObservable = clientObservable;
             clientObservable.addObserver(this);
+            // TODO remove
+            System.out.println("Client - ClientGui(): Observer added");
             build();
+            // TODO remove
+            System.out.println("Client - ClientGui(): GUI Built");
         }
 
         // build the gui
@@ -123,13 +140,15 @@ public class Client {
                 public void run() {
                     chat_display.append(finalArg.toString());
                     chat_display.append("\n");
+                    // TODO remove
+                    System.out.println(" Client - ClientGui - update(): chat_display updated");
                 }
             });
         }
     }
 
     public static void main(String[] args) {
-        int port = 1207;
+        int port = 1201;
         ClientObservable observable = new ClientObservable();
 
         JFrame frame = new ClientGui(observable);
@@ -147,6 +166,8 @@ public class Client {
         // connect to server
         try {
             observable.InitSocket(server_address, port);
+            // TODO remove
+            System.out.println("Client - connecting to server");
         } catch (Exception e) {
             System.out.println("Cannot connect to " + server_address + ":" + port);
             ((ClientGui) frame).chat_display.append("Cannot connect to " + server_address + ":" + port);
@@ -157,6 +178,8 @@ public class Client {
         JFrame userdialog = new JFrame("User Information");
         String uname = JOptionPane.showInputDialog(userdialog, "Enter your username:");
         ClientGui.clientObservable.send(uname);
+        // TODO remove
+        System.out.println("Client - username sent to server");
 
 
     }
