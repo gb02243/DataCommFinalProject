@@ -12,30 +12,30 @@ public class Server {
     private static final ClientHandler[] threads = new ClientHandler[maxClients];
 
     public static void main(String[] args) {
-        try{
+        try {
             ss = new ServerSocket(1207);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         //create a new socket & thread for each client
-        while(true){
-            try{
+        while (true) {
+            try {
                 s = ss.accept();
                 int i = 0;
                 for (i = 0; i < maxClients; i++) {
-                    if(threads[i] == null){
+                    if (threads[i] == null) {
                         (threads[i] = new ClientHandler(s, threads)).start();
                         break;
                     }
                 }
-                if(i == maxClients){
+                if (i == maxClients) {
                     PrintStream os = new PrintStream(s.getOutputStream());
-                    os.println(maxClients+" clients are already connected.");
+                    os.println(maxClients + " clients are already connected.");
                     os.close();
                     s.close();
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

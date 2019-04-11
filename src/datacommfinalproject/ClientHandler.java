@@ -36,12 +36,12 @@ public class ClientHandler extends Thread {
                     + " type /exit to leave");
             synchronized (this) {
                 for (int i = 0; i < clientCount; i++) {
-                        username = "@" + name;
-                        break;
+                    username = "@" + name;
+                    break;
                 }
                 for (int i = 0; i < clientCount; i++) {
                     if (threads[i] != null && threads[i] != this) {
-                        threads[i].dout.println("--- "+name+" has joined the chat ---");
+                        threads[i].dout.println("--- " + name + " has joined the chat ---");
                     }
                 }
             }
@@ -67,7 +67,7 @@ public class ClientHandler extends Thread {
                 for (int i = 0; i < clientCount; i++) {
                     if (threads[i] != null && threads[i] != this
                             && threads[i].username != null) {
-                        threads[i].dout.println("--- "+name+" has left the chat ---");
+                        threads[i].dout.println("--- " + name + " has left the chat ---");
                     }
                 }
             }

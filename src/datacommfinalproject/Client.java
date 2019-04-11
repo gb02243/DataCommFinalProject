@@ -88,7 +88,7 @@ public class Client {
             Box box = Box.createHorizontalBox();
             add(box, BorderLayout.SOUTH);
             message_text = new JTextField();
-            message_text.setPreferredSize( new Dimension( 200, 100 ) );
+            message_text.setPreferredSize(new Dimension(200, 100));
             message_send = new JButton("Send");
             box.add(message_text);
             box.add(message_send);
@@ -140,18 +140,27 @@ public class Client {
         frame.setResizable(false);
         frame.setVisible(true);
 
-        // get server address from dialog
-        JFrame addressdialog = new JFrame("Server Information");
-        String server_address = JOptionPane.showInputDialog(addressdialog, "Enter the Server IP:");
+        boolean success = false;
 
-        // connect to server
-        try {
-            observable.InitSocket(server_address, port);
-        } catch (Exception e) {
-            System.out.println("Cannot connect to " + server_address + ":" + port);
-            ((ClientGui) frame).chat_display.append("Cannot connect to " + server_address + ":" + port);
-            e.printStackTrace();
+
+
+        while(!success){
+            // get server address from dialog
+            JFrame addressdialog = new JFrame("Server Information");
+            String server_address = JOptionPane.showInputDialog(addressdialog, "Enter the Server IP:", "127.0.0.1");
+
+            // connect to server
+            try {
+                observable.InitSocket(server_address, port);
+                success = true;
+            } catch (Exception e) {
+                System.out.println("Cannot connect to " + server_address + ":" + port);
+                ((ClientGui) frame).chat_display.append("Cannot connect to " + server_address + ":" + port+"\n");
+                e.printStackTrace();
+                success = false;
+            }
         }
+
 
         // get username from dialog
         JFrame userdialog = new JFrame("User Information");
